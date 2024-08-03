@@ -53,17 +53,43 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .result h2 {
+            color: #007bff;
+        }
     </style>
 </head>
 <body>
     <header>CSRF Vulnerable Page</header>
     <div class="container">
         <h1>Change Email</h1>
-        <form action="https://example.com/change-email" method="POST">
+        <form id="emailForm">
             <label for="email">New Email:</label>
             <input type="text" id="email" name="email" required>
             <input type="submit" value="Submit">
         </form>
+        <div class="result">
+            <h2>Submitted Email:</h2>
+            <pre id="submittedEmail">No email submitted yet.</pre>
+        </div>
     </div>
+
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Get user input
+            const emailInput = document.getElementById('email').value;
+
+            // Display the submitted email
+            document.getElementById('submittedEmail').textContent = emailInput;
+
+            // Simulate sending data to a server (in reality, the action URL would handle this)
+            console.log(`Simulated server request with email: ${emailInput}`);
+        });
+    </script>
 </body>
 </html>
