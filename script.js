@@ -18,7 +18,11 @@ function handleSubmit() {
 
     // Validate form values
     if (name && email) {
-        document.getElementById("formResult").innerText = "Form submitted successfully! Name: " + name + ", Email: " + email;
+        // Display form data
+        document.getElementById("formResult").innerHTML = 
+            "<strong>Form submitted successfully!</strong><br>" +
+            "Name: " + name + "<br>" +
+            "Email: " + email;
     } else {
         document.getElementById("formResult").innerText = "Please fill out all fields.";
     }
