@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Span and JavaScript Example</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <p>This is a <span id="mySpan">span element</span>.</p>
+    <button onclick="updateSpan()">Update Span</button>
+
+    <script>
+        function updateSpan() {
+            var span = document.getElementById('mySpan');
+            span.textContent = 'Updated content!';
+            span.style.color = 'green';
+            span.classList.add('highlight');
+        }
+    </script>
+</body>
+</html>
