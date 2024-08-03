@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Request Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #response {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 10px;
+            white-space: pre-wrap; /* Preserves whitespace formatting */
+        }
+    </style>
+</head>
+<body>
+    <h1>Fetch Request Demo</h1>
+    <form id="requestForm">
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url" required>
+        <br><br>
+        <label for="method">Method:</label>
+        <select id="method" name="method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+        </select>
+        <br><br>
+        <label for="headers">Headers (JSON):</label>
+        <textarea id="headers" name="headers" rows="4" cols="50" placeholder='{"Content-Type": "application/json"}'></textarea>
+        <br><br>
+        <label for="body">Body (for POST/PUT requests):</label>
+        <textarea id="body" name="body" rows="4" cols="50" placeholder='{"key": "value"}'></textarea>
+        <br><br>
+        <button type="submit">Send Request</button>
+    </form>
+
+    <div id="response">
+        <h2>Request Details:</h2>
+        <pre id="requestDetails"></pre>
+        <h2>Response:</h2>
+        <pre id="responseDetails"></pre>
+    </div>
+
+    <script>
+        document.getElementById('requestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Gather form data
+            const url = document.getElementById('url').value;
+            const method = document.getElementById('method').value;
+            const headers = document.getElementById('headers').value;
+            const body = document.getElementById('body').value;
+
+            // Prepare the headers
+            let headersObj = {};
+            try {
+                headersObj = JSON.parse(headers);
+            } catch (e) {
+                alert('Invalid headers JSON');
+                return;
+            }
+
+            // Prepare the fetch options
+            const fetchOptions = {
+                method: method,
+                headers: headersObj
+            };
+            if (method === 'POST' || method === 'PUT') {
+                fetchOptions.body = body;
+            }
+
+            // Display request details
+            document.getElementById('requestDetails').textContent = JSON.stringify({
+                url: url,
+                method: method,
+                headers: headersObj,
+                body: body
+            }, null, 2);
+
+            // Perform the fetch request
+            fetch(url, fetchOptions)
+                .then(response => {
+                    return response.text().then(text => {
+                        document.getElementById('responseDetails').textContent = `Status: ${response.status}\n\nHeaders: ${JSON.stringify([...response.headers.entries()], null, 2)}\n\nBody:\n${text}`;
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('responseDetails').textContent = `Error: ${error}`;
+                });
+        });
+    </script>
+</body>
+</html>
