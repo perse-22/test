@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>External JavaScript and PHP Example</title>
+    <title>JavaScript Web Form Example</title>
 </head>
 <body>
-    <h1>Test</h1>
+    <h1>JavaScript Web Form Example</h1>
+
+    <h2>Web Form</h2>
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <input type="button" value="Submit" onclick="handleSubmit()">
+    </form>
+
+    <p id="formResult"></p>
 
     <h2>Buttons for JavaScript Functions</h2>
     <button onclick="sayHello()">Say Hello</button>
     <button onclick="showSum(5, 10)">Show Sum</button>
     <button onclick="changeBackgroundColor()">Change Background Color</button>
-    
-    <p id="message"></p>
 
     <script src="script.js"></script>
 </body>
