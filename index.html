@@ -1,27 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External JavaScript Example</title>
+</head>
 <body>
+    <h1>External JavaScript Example</h1>
+    <button onclick="sayHello()">Say Hello</button>
+    <button onclick="showSum(5, 10)">Show Sum</button>
+    <button onclick="changeBackgroundColor()">Change Background Color</button>
 
-<h1>test</h1>
-
-<button type="button"
-onclick="document.getElementById('demo').innerHTML = Date()">
-Click me to display Date and Time.</button>
-
-<p id="demo"></p>
-
-<script src="test.js"></script>
-    <h2>
-        External JavaScript
-    </h2>
-
-    <h3 id="demo" style="color:green;">
-        GeeksforGeeks
-    </h3>
-
-    <button type="button" onclick="myFun()">
-        Click Here
-    </button>
-  
-</body>  
-</html> 
+    <script src="script.js"></script>
+</body>
+</html>
