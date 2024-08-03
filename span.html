@@ -9,17 +9,33 @@
             background-color: yellow;
             font-weight: bold;
         }
+        .italic {
+            font-style: italic;
+        }
+        .red-text {
+            color: red;
+        }
     </style>
 </head>
 <body>
-    <p>This is a <span id="mySpan">span element</span>.</p>
+    <h1>Example of `<span>` with JavaScript</h1>
+    
+    <p>This is a <span id="mySpan" class="red-text">span element</span>.</p>
+    
     <button onclick="updateSpan()">Update Span</button>
-
+    
     <script>
         function updateSpan() {
+            // Select the span element by its ID
             var span = document.getElementById('mySpan');
+            
+            // Update the content of the span
             span.textContent = 'Updated content!';
+            
+            // Change the color of the span text
             span.style.color = 'green';
+            
+            // Add a new class to the span
             span.classList.add('highlight');
         }
     </script>
