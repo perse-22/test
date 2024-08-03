@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+    <h1>Upload a File</h1>
+    <form id="uploadForm">
+        <input type="file" id="fileInput" name="file" />
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                // Simulate file handling
+                console.log('File selected:', file.name);
+                // You can read the file contents here if needed
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    console.log('File contents:', event.target.result);
+                };
+                reader.readAsText(file); // Change this depending on your file type
+            }
+        });
+    </script>
+</body>
+</html>
