@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple WAF Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #response {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 10px;
+            white-space: pre-wrap; /* Preserves whitespace formatting */
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple WAF Example</h1>
+    <form id="requestForm">
+        <label for="input">Enter your input:</label>
+        <input type="text" id="input" name="input" required>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="response">
+        <h2>Response:</h2>
+        <pre id="responseDetails"></pre>
+    </div>
+
+    <script>
+        function isSafeInput(input) {
+            // Basic patterns to look for; this is not exhaustive
+            const dangerousPatterns = [
+                /<script.*?>.*?<\/script>/i, // XSS
+                /SELECT.*FROM.*WHERE/i, // SQL Injection
+                /--/i, // SQL comment
+                /<.*?>/i // Any HTML tags
+            ];
+
+            return !dangerousPatterns.some(pattern => pattern.test(input));
+        }
+
+        document.getElementById('requestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const userInput = document.getElementById('input').value;
+
+            if (isSafeInput(userInput)) {
+                // If input is safe, show it or process further
+                document.getElementById('responseDetails').textContent = `Input is safe: ${userInput}`;
+            } else {
+                // If input contains dangerous patterns
+                document.getElementById('responseDetails').textContent = 'Error: Unsafe input detected.';
+            }
+        });
+    </script>
+</body>
+</html>
