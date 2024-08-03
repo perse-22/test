@@ -13,3 +13,4 @@ function handleSubmit() {
     } else {
         document.getElementById("formResult").innerText = "Please fill out all fields.";
     }
+}    
