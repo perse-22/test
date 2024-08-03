@@ -33,7 +33,7 @@
 
     <script>
         function isSafeInput(input) {
-            // Basic patterns to look for; this is not exhaustive
+            
             const dangerousPatterns = [
                 /<script.*?>.*?<\/script>/i, // XSS
                 /SELECT.*FROM.*WHERE/i, // SQL Injection
@@ -51,10 +51,10 @@
 
             if (isSafeInput(userInput)) {
                 // If input is safe, show it or process further
-                document.getElementById('responseDetails').textContent = `Input is safe: ${userInput}`;
+                document.getElementById('responseDetails').textContent = `Passed: ${userInput}`;
             } else {
                 // If input contains dangerous patterns
-                document.getElementById('responseDetails').textContent = 'Error: Unsafe input detected.';
+                document.getElementById('responseDetails').textContent = 'Blocked!!!!!!';
             }
         });
     </script>
