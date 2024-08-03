@@ -45,13 +45,10 @@
             const password = document.getElementById('password').value;
 
             // Prepare the payload
-            const payload = {
-                name: name,
-                password: password
-            };
+            const payload = `Name: ${name}\nPassword: ${password}`;
 
             // Display the request payload
-            document.getElementById('requestPayload').textContent = JSON.stringify(payload, null, 2);
+            document.getElementById('requestPayload').textContent = payload;
 
             // Perform the fetch request
             fetch('https://httpbin.org/post', { // Example endpoint, replace with your endpoint
@@ -59,12 +56,12 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({ name, password })
             })
-            .then(response => response.json())
+            .then(response => response.text()) // Get response as text
             .then(data => {
                 // Display the response
-                document.getElementById('responseDetails').textContent = JSON.stringify(data, null, 2);
+                document.getElementById('responseDetails').textContent = data;
             })
             .catch(error => {
                 document.getElementById('responseDetails').textContent = `Error: ${error.message}`;
