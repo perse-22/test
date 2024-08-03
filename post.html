@@ -20,32 +20,33 @@
 <body>
     <h1>Fetch Headers Demo</h1>
     <form id="requestForm">
-        <label for="url">URL:</label>
+        <label for="url">Enter URL:</label>
         <input type="text" id="url" name="url" required>
         <button type="submit">Fetch Headers</button>
     </form>
 
     <div id="response">
         <h2>Response Headers:</h2>
-        <pre id="responseHeaders"></pre>
+        <pre id="headersDetails"></pre>
     </div>
 
     <script>
         document.getElementById('requestForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
             const url = document.getElementById('url').value;
 
-            // Perform the fetch request
-            fetch(url)
-                .then(response => {
-                    // Convert headers to an object and display them
-                    const headers = [...response.headers.entries()];
-                    document.getElementById('responseHeaders').textContent = JSON.stringify(headers, null, 2);
-                })
-                .catch(error => {
-                    document.getElementById('responseHeaders').textContent = `Error: ${error.message}`;
-                });
+            fetch(url, {
+                method: 'HEAD' // Use HEAD method to only get headers
+            })
+            .then(response => {
+                // Display headers
+                const headers = [...response.headers.entries()];
+                const headersText = headers.map(([key, value]) => `${key}: ${value}`).join('\n');
+                document.getElementById('headersDetails').textContent = headersText;
+            })
+            .catch(error => {
+                document.getElementById('headersDetails').textContent = `Error: ${error.message}`;
+            });
         });
     </script>
 </body>
