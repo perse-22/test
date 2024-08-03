@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Playground</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            overflow-x: auto;
+            margin: 10px 0;
+            text-align: left;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>XSS Playground</header>
+    <div class="container">
+        <h1>Test XSS Payloads</h1>
+        <label for="xssInput">Enter your payload:</label>
+        <input type="text" id="xssInput" placeholder="Type XSS payload here...">
+        <button onclick="runXSS()">Submit</button>
+
+        <div class="result">
+            <h2>Output:</h2>
+            <pre id="output"></pre>
+        </div>
+    </div>
+
+    <script>
+        function runXSS() {
+            // Get user input
+            const userInput = document.getElementById('xssInput').value;
+
+            // Display the input as output (Vulnerable to XSS)
+            document.getElementById('output').innerHTML = userInput;
+        }
+    </script>
+</body>
+</html>
