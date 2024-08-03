@@ -1,3 +1,2 @@
-function myFun () {
-    document.getElementById('demo')
-        .innerHTML = 'Content Changed'
+function sayHello() {
+    alert("Hello, World!");
