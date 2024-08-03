@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Upload</title>
+    <style>
+        #fileContents {
+            white-space: pre-wrap; /* Preserves whitespace formatting */
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
     <h1>Upload a File</h1>
@@ -12,6 +22,8 @@
         <button type="submit">Upload</button>
     </form>
 
+    <div id="fileContents"></div>
+
     <script>
         document.getElementById('uploadForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -19,12 +31,11 @@
             const file = fileInput.files[0];
 
             if (file) {
-                // Simulate file handling
-                console.log('File selected:', file.name);
-                // You can read the file contents here if needed
                 const reader = new FileReader();
                 reader.onload = function(event) {
-                    console.log('File contents:', event.target.result);
+                    // Display the file contents in the div
+                    const fileContentsDiv = document.getElementById('fileContents');
+                    fileContentsDiv.textContent = event.target.result;
                 };
                 reader.readAsText(file); // Change this depending on your file type
             }
