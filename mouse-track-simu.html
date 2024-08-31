@@ -40,11 +40,11 @@
         function moveMouse() {
             if (Math.abs(x - targetX) < 1 && Math.abs(y - targetY) < 1) {
                 // Pause for a random time between movements
-                setTimeout(setNewTarget, getRandomInt(500, 2000));
+                setTimeout(setNewTarget, getRandomInt(2000, 5000)); // Extended pause time
             } else {
-                // Gradually move towards the target
-                x += (targetX - x) * 0.1;
-                y += (targetY - y) * 0.1;
+                // Gradually move towards the target, with slower speed
+                x += (targetX - x) * 0.05; // Slower movement
+                y += (targetY - y) * 0.05;
 
                 // Update the coordinates display
                 coordinatesDiv.textContent = `X: ${Math.floor(x)}, Y: ${Math.floor(y)}`;
@@ -52,7 +52,7 @@
                 coordinatesDiv.style.left = `${x + 10}px`;
 
                 // Continue moving
-                setTimeout(moveMouse, 50);
+                setTimeout(moveMouse, 100); // Slower update rate
             }
         }
 
