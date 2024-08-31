@@ -29,34 +29,44 @@
     <script>
         let x = window.innerWidth / 2;
         let y = window.innerHeight / 2;
+        let targetX = x;
+        let targetY = y;
         const coordinatesDiv = document.getElementById('coordinates');
 
-        function moveMouse() {
-            // Simulate human-like movement with randomization
-            const moveX = Math.random() * 10 - 5; // Random small move
-            const moveY = Math.random() * 10 - 5; // Random small move
-
-            x += moveX;
-            y += moveY;
-
-            // Ensure the cursor stays within the viewport
-            if (x < 0) x = 0;
-            if (y < 0) y = 0;
-            if (x > window.innerWidth) x = window.innerWidth;
-            if (y > window.innerHeight) y = window.innerHeight;
-
-            // Update the coordinates display
-            coordinatesDiv.textContent = `X: ${Math.floor(x)}, Y: ${Math.floor(y)}`;
-            coordinatesDiv.style.top = `${y + 10}px`;
-            coordinatesDiv.style.left = `${x + 10}px`;
-
-            // Schedule the next movement with random delay
-            const delay = Math.random() * 100 + 50; // Random delay between 50ms to 150ms
-            setTimeout(moveMouse, delay);
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
-        // Start the simulated mouse movement
-        moveMouse();
+        function moveMouse() {
+            if (Math.abs(x - targetX) < 1 && Math.abs(y - targetY) < 1) {
+                // Pause for a random time between movements
+                setTimeout(setNewTarget, getRandomInt(500, 2000));
+            } else {
+                // Gradually move towards the target
+                x += (targetX - x) * 0.1;
+                y += (targetY - y) * 0.1;
+
+                // Update the coordinates display
+                coordinatesDiv.textContent = `X: ${Math.floor(x)}, Y: ${Math.floor(y)}`;
+                coordinatesDiv.style.top = `${y + 10}px`;
+                coordinatesDiv.style.left = `${x + 10}px`;
+
+                // Continue moving
+                setTimeout(moveMouse, 50);
+            }
+        }
+
+        function setNewTarget() {
+            // Set a new random target within the viewport
+            targetX = getRandomInt(0, window.innerWidth);
+            targetY = getRandomInt(0, window.innerHeight);
+
+            // Start moving towards the new target
+            moveMouse();
+        }
+
+        // Start the simulation
+        setNewTarget();
     </script>
 </body>
 </html>
