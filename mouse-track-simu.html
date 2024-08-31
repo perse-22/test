@@ -31,6 +31,8 @@
         let y = window.innerHeight / 2;
         let targetX = x;
         let targetY = y;
+        let controlX, controlY; // Control points for the curve
+        let t = 0; // Time variable for curve progression
         const coordinatesDiv = document.getElementById('coordinates');
 
         function getRandomInt(min, max) {
@@ -38,34 +40,46 @@
         }
 
         function moveMouse() {
-            if (Math.abs(x - targetX) < 1 && Math.abs(y - targetY) < 1) {
-                // Pause for a random time between movements
+            if (t >= 1) {
+                
                 setTimeout(setNewTarget, getRandomInt(2000, 5000)); // Extended pause time
             } else {
-                // Gradually move towards the target, with slower speed
-                x += (targetX - x) * 0.05; // Slower movement
-                y += (targetY - y) * 0.05;
+                
+                const currentX = (1 - t) * (1 - t) * x + 2 * (1 - t) * t * controlX + t * t * targetX;
+                const currentY = (1 - t) * (1 - t) * y + 2 * (1 - t) * t * controlY + t * t * targetY;
 
-                // Update the coordinates display
+               
+                x = currentX;
+                y = currentY;
+                t += 0.01; // Progress along the curve
+
+                
                 coordinatesDiv.textContent = `X: ${Math.floor(x)}, Y: ${Math.floor(y)}`;
                 coordinatesDiv.style.top = `${y + 10}px`;
                 coordinatesDiv.style.left = `${x + 10}px`;
 
-                // Continue moving
-                setTimeout(moveMouse, 100); // Slower update rate
+                
+                setTimeout(moveMouse, 100); 
             }
         }
 
         function setNewTarget() {
-            // Set a new random target within the viewport
+            
             targetX = getRandomInt(0, window.innerWidth);
             targetY = getRandomInt(0, window.innerHeight);
 
-            // Start moving towards the new target
+            
+            controlX = (x + targetX) / 2 + getRandomInt(-100, 100);
+            controlY = (y + targetY) / 2 + getRandomInt(-100, 100);
+
+            
+            t = 0;
+
+            
             moveMouse();
         }
 
-        // Start the simulation
+        
         setNewTarget();
     </script>
 </body>
