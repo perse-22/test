@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulated Mouse Movement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        #coordinates {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="coordinates">X: 0, Y: 0</div>
+
+    <script>
+        const coordinatesDiv = document.getElementById('coordinates');
+        let x = 0;
+        let y = 0;
+        let directionX = 1;
+        let directionY = 1;
+
+        function moveMouse() {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            // Move the coordinates
+            x += directionX * 5;
+            y += directionY * 5;
+
+            // Bounce off the edges
+            if (x <= 0 || x >= viewportWidth - 50) directionX *= -1;
+            if (y <= 0 || y >= viewportHeight - 20) directionY *= -1;
+
+            // Update the coordinates display
+            coordinatesDiv.textContent = `X: ${x}, Y: ${y}`;
+            coordinatesDiv.style.left = `${x}px`;
+            coordinatesDiv.style.top = `${y}px`;
+
+            // Repeat the movement
+            requestAnimationFrame(moveMouse);
+        }
+
+        // Start the movement
+        requestAnimationFrame(moveMouse);
+    </script>
+</body>
+</html>
